@@ -17,21 +17,15 @@ let list_drop_first l =
     | _h :: t -> t
     | _ -> failwith "empty list";;
 
-
 let rec do_process_fasta_format input dna_acc acc =
     match input with
     | [] ->
-            let acc =
                 if List.length dna_acc > 0 then
                     let dna_acc = List.rev dna_acc in
                     String.concat "" dna_acc :: acc
-                else acc in
-
-            let acc = List.rev acc in
-            list_drop_first acc
+                else acc
     | h :: t ->
             let (acc, dna_acc) = if String.starts_with ~prefix:">" h then
-                let dna_acc = List.rev dna_acc in
                 let dna = String.concat "" dna_acc in
                 let h = String.to_seq h |> List.of_seq |> list_drop_first |> List.to_seq |> String.of_seq in
                 let acc = h :: dna :: acc in
