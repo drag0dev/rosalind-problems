@@ -1,0 +1,4 @@
+(executable
+ (name main)
+ (public_name perm)
+ (libraries core shared))
